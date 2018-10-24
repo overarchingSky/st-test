@@ -12,12 +12,54 @@ html,body,#app{
     color:@blueBlack;
 }
 
+/*滚动条样式*/
+::-webkit-scrollbar {/*滚动条整体样式*/
+    width: 6px;     /*高宽分别对应横竖滚动条的尺寸*/
+    height: 4px;
+}
+::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+    border-radius: 5px;
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    background: rgba(0,0,0,0.2);
+}
+::-webkit-scrollbar-track {/*滚动条里面轨道*/
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    border-radius: 0;
+    background: rgba(0,0,0,0.1);
+}
+
 .hover:hover{
     &:hover{
         color:@blue;
     }
 }
 
+input{
+    border:none;
+}
 
+.icon-warp{
+    .icon{
+        margin-left:10px;
+        margin-right:10px;
+    }
+}
+
+.icon-dashboard,
+.icon-sitemap,
+.icon-boat,
+.icon-th-card,
+.icon-th-list,
+.icon-search{
+    font-size:20px;
+}
+
+.icon-trash,
+.icon-plus,
+.icon-desktop,
+.icon-info,
+.icon-folder{
+    font-size:16px
+}
 
 

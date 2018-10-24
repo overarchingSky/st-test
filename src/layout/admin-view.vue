@@ -12,7 +12,7 @@
             <slot />
         </div>
         <footer class="footer">
-			footer
+            @Copyright 2017 thoughtWorks
 		</footer>
 	</div>
 </template>
@@ -38,7 +38,7 @@ export default {
     height:100%;
     display:grid;
 	grid-template-columns: 1fr 300px 900px 1fr;
-	grid-template-rows:50px 1fr 2em;
+	grid-template-rows:50px 1fr auto;
 	grid-template-areas: 
 	"header header header header"
 	". nav main ."
@@ -69,10 +69,15 @@ export default {
 	.main{
         grid-area:main;
         overflow-y: auto;
-        padding:10px 0 10px 20px;
+        padding:@spacing 0 @spacing 20px;
 	}
 	.footer{
-		grid-area:footer;
+        grid-area:footer;
+        // align-self: center;
+        // justify-self: center;
+        text-align:center;
+        padding:8px 0;
+        background-color:white;
 	}
     .wt-header{
         box-shadow:0 0 1px 1px #ccc;

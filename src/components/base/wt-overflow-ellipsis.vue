@@ -1,12 +1,13 @@
 <!--多行溢出显示省略号组件-->
 <template>
-    <div class="text-ellipsis" ref="ellipsis">
+    <div class="wt-overflow-ellipsis" ref="ellipsis">
         <slot />
     </div>
 </template>
 
 <script>
 export default {
+    name:'wt-overflow-ellipsis',
     props:{
         //最大显示行
         row:{
@@ -39,7 +40,7 @@ export default {
 </script>
 
 <style>
-.text-ellipsis{
+.wt-overflow-ellipsis{
     display:-webkit-box;
     overflow: hidden;
     text-overflow: ellipsis;

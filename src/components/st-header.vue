@@ -5,19 +5,17 @@
             <wt-avatar size="40px" class="head-portrait">
 
             </wt-avatar>
-            <icon-arrow-down></icon-arrow-down>
+            <i class="icon-angle-down"></i>
         </wt-box>
     </header>
 </template>
 
 <script>
 import Vue from 'vue'
-import IconArrowDown from 'svg-icon/arrow-down'
 import wtAvatar from 'cps/base/wt-avatar'
 import PopUpMenu from 'cps/pop-up-menu'
 export default {
     components:{
-        IconArrowDown,
         wtAvatar,
     },
     computed:{

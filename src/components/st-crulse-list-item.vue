@@ -1,0 +1,104 @@
+<template>
+    <div class="st-crulse-list-item">
+        <div class="picture">
+            <img src="~assets/os icons/cent_os.png" alt="">
+        </div>
+        <wt-row class="t-lt">
+            <span class="source" slot="lt">
+                <i class="icon icon-desktop"></i>121312323
+            </span>
+            <span class="meta building">building</span>
+            <span class="meta idle">Idle</span>
+        </wt-row>
+        <div class="t-rt">
+            <span class="icon-warp">
+                <i class="icon icon-info"></i>121312323
+            </span>
+            <span class="icon-warp">
+                <i class="icon icon-folder"></i>121312323
+            </span>
+        </div>
+        <div class="b-lt">
+            <wt-button>
+                <i class="icon icon-plus add" slot="icon"></i>
+            </wt-button>
+            <wt-chip :data="new Array(9).fill('Firefox')" class="resources">
+
+            </wt-chip>
+                <!-- <wt-box direction="row" class="resources">
+                    Firefox
+                    <i class="icon icon-trash"></i>
+                </wt-box>
+             -->
+        </div>
+        <div class="b-rt">
+            <wt-button>
+                <i class="icon icon-deny" slot="icon"></i>
+                Deny
+            </wt-button>
+        </div>
+    </div>
+</template>
+
+<script>
+export default {
+    name:'st-crulse-list-item'
+}
+</script>
+
+<style lang="less">
+@import '~less/var.less';
+.st-crulse-list-item{
+    background-color:white;
+    display:grid;
+    grid-template-columns:repeat(12,1fr);
+    grid-template-rows:60px 60px;
+    align-items:center;
+    grid-template-areas:
+    "icon icon t-lt t-lt t-lt t-lt t-lt t-rt t-rt t-rt t-rt t-rt"
+    "icon icon b-lt b-lt b-lt b-lt b-lt b-lt b-lt b-lt b-rt b-rt";
+    &+.st-crulse-list-item{
+        margin-top:@spacing;
+    }
+    .picture{
+        grid-area:icon;
+        justify-self: center;
+    }
+    .t-lt{
+        grid-area:t-lt;
+    }
+    .t-rt{
+        grid-area:t-rt;
+    }
+    .b-lt{
+        grid-area:b-lt;
+        display:flex;
+        flex-direction: row;
+        align-items: center;
+    }
+    .b-rt{
+        grid-area:b-rt;
+        justify-self: center;
+    }
+    .icon{
+        margin-right:10px;
+    }
+    .source{
+        color:@blue;
+        margin-right:20px;
+    }
+    .meta{
+        padding:2px 6px;
+        color:white;
+        &.building{
+            background-color:@orgin;
+        }
+        &.idle{
+            background-color:@green;
+        }
+    }
+    .resources{
+        padding:5px;
+    }
+}
+</style>

@@ -1,12 +1,9 @@
 <template>
     <div class="st-menu">
-        <wt-box direction="row" class="st-menu-item hover" v-for="(menu, index) in data" :key="index">
-            <wt-row>
-                <span slot="lt">icon</span>
-                {{menu.label}}
-            </wt-row>
-        </wt-box>
-        
+        <wt-row class="st-menu-item hover" v-for="(menu, index) in data" :key="index">
+            <span slot="lt">icon</span>
+            {{menu.label}}
+        </wt-row>
     </div>
 </template>
 

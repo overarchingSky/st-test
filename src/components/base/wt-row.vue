@@ -19,6 +19,7 @@ export default {
 .wt-row {
 	display: flex;
 	flex-direction: row;
+	align-items:center;
 	position: relative;
 	> .content {
 		flex: 1;
