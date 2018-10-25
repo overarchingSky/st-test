@@ -5,31 +5,27 @@
         </div>
         <wt-row class="t-lt">
             <span class="source" slot="lt">
-                <i class="icon icon-desktop"></i>121312323
+                <i class="icon icon-desktop"></i>
+                {{data.name}}
             </span>
-            <span class="meta building">building</span>
-            <span class="meta idle">Idle</span>
+            <span class="meta building" v-if="data.status == 'building'">building</span>
+            <span class="meta idle"  v-if="data.status == 'idle'">Idle</span>
         </wt-row>
         <div class="t-rt">
             <span class="icon-warp">
-                <i class="icon icon-info"></i>121312323
+                <i class="icon icon-info"></i>
+                {{data.ip}}
             </span>
             <span class="icon-warp">
-                <i class="icon icon-folder"></i>121312323
+                <i class="icon icon-folder"></i>
+                {{data.location}}
             </span>
         </div>
         <div class="b-lt">
             <wt-button>
                 <i class="icon icon-plus add" slot="icon"></i>
             </wt-button>
-            <wt-chip :data="new Array(9).fill('Firefox')" class="resources">
-
-            </wt-chip>
-                <!-- <wt-box direction="row" class="resources">
-                    Firefox
-                    <i class="icon icon-trash"></i>
-                </wt-box>
-             -->
+            <wt-chip :data="data.resources" class="resources"></wt-chip>
         </div>
         <div class="b-rt">
             <wt-button>
@@ -42,7 +38,13 @@
 
 <script>
 export default {
-    name:'st-crulse-list-item'
+    name:'st-crulse-list-item',
+    props:{
+        data:{
+            type:Object,
+            required:true
+        }
+    },
 }
 </script>
 
@@ -79,6 +81,12 @@ export default {
     .b-rt{
         grid-area:b-rt;
         justify-self: center;
+    }
+    .icon-warp{
+        .icon{
+            vertical-align:-1px;
+        }
+        
     }
     .icon{
         margin-right:10px;

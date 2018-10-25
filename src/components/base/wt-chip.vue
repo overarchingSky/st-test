@@ -20,7 +20,7 @@ export default {
     props:{
         data:{
             type:Array,
-            required:true,
+            required:true
         }
     },
     data(){
@@ -72,11 +72,11 @@ export default {
             this.$nextTick(_ => {
                 if(this.overflow = this.checkOverflow()){
                     this.chipsData = this.getAppropriateChips()
-                    //取消延迟显示的样式
-                    this.delay = ''
                 }else{
                     this.chipsData = this.data
                 }
+                //取消延迟显示的样式
+                this.delay = ''
             })
             
         }

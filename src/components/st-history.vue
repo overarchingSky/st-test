@@ -2,7 +2,7 @@
     <div class="st-history">
         history
         <ul>
-            <li v-for="(history, index) in data" :key="index" class="hover" ref="historys">{{history}}</li>
+            <li v-for="(history, index) in data" :key="index" class="history-item hover" ref="historys">{{history}}</li>
         </ul>
     </div>
 </template>
@@ -12,7 +12,7 @@ export default{
     name:'st-history',
     data(){
         return {
-            data:['考虑到附近上空拦截的饭卡上打开链接付款了按实际疯狂拉升阶段克里夫','考虑到附近上空拦截的饭卡上打开链接付款了按实际疯狂拉升阶段克里夫']
+            data:['ksdfjaklsjdakd/jksdfkljklasjdklfj/jaslkdfjklsfj','ksdfjaklsjdakd/jksdfkljklasjdklfj/jaslkdfjklsfjkljsgjaksgjklajskjkljks','ksdfjaklsjdakd/jksdfkljklasjdklfj/jaslkdfjklsfj','ksdfjaklsjdakd/jksdfkljklasjdklfj/jaslkdfjklsfj','ksdfjaklsjdakd/jksdfkljklasjdklfj/jaslkdfjklsfj','ksdfjaklsjdakd/jksdfkljklasjdklfj/jaslkdfjklsfj']
         }
     },
     computed:{
@@ -23,7 +23,7 @@ export default{
     mounted(){
         
         this.historys.forEach(history => {
-            $clamp(history,{clamp:2,useNativeClamp:false})
+            $clamp(history,{clamp:1,useNativeClamp:false})
         })
     },
 }
@@ -46,6 +46,7 @@ export default{
         cursor:pointer;
         transition:color .3s ease;
         will-change:color;
+        word-break: keep-all;
     }
 }
 </style>

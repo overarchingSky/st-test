@@ -2,14 +2,12 @@
     <wt-col :scroll="true" class="page home">
         <st-overview slot="head"></st-overview>
         <wt-row class="bar" slot="head">
-            <st-crulse-list-filter></st-crulse-list-filter>
-            <!-- 高亮功能用tab来做 -->
+            <st-crulse-list-filter @on-filter="setFilterData"></st-crulse-list-filter>
             <wt-box class="views-switching" direction="row" slot="rt">
-                <i class="icon icon-th-card"></i>
-                <i class="icon icon-th-list"></i>
+                <i v-for="(view, index) in views" :key="index" :class="setViewsClass(view)" @click="setCurrentView(view)"></i>
             </wt-box>
         </wt-row>
-        <st-crulse-list></st-crulse-list>
+        <st-crulse-list :filter="filterData"></st-crulse-list>
     </wt-col>
 </template>
 
@@ -17,12 +15,32 @@
 import StOverview from 'cps/st-overview';
 import StCrulseListFilter from 'cps/st-crulse-list-filter'
 import StCrulseList from 'cps/st-crulse-list'
+
 export default {
     name:'home',
     components:{
         StOverview,
         StCrulseListFilter,
         StCrulseList
+    },
+    data(){
+        return {
+            filterData:{},
+            views:['card','list'],
+            viewType:'list'
+        }
+    },
+    methods:{
+        setViewsClass(view){
+            let isActive = view == this.viewType ? 'active' : ''
+            return `icon icon-btn icon-th-${view} ${isActive}`
+        },
+        setCurrentView(view){
+            this.viewType = view
+        },
+        setFilterData(val){
+            this.filterData = val
+        }
     }
 }
 </script>
@@ -40,6 +58,12 @@ export default {
    }
    .st-crulse-list{
        overflow-y: auto;
+   }
+   .icon-btn{
+       cursor:pointer;
+       &.active{
+           color:@blue;
+       }
    }
    .content-scroll{
        

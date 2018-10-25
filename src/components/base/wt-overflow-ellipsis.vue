@@ -13,7 +13,12 @@ export default {
         row:{
             type:[String,Number],
             default:1
-        }
+        },
+        //是否使用原生的溢出省略
+        userNative:{
+            type:Boolean,
+            default:false
+        },
     },
     computed:{
         ellipsis(){
@@ -27,14 +32,22 @@ export default {
             } else {
                 return getComputedStyle(element, false)
             }
+        },
+        nativeOverflowEllipsis(){
+             this.ellipsis.style['-webkit-line-clamp'] = this.row
+            let computedStyle = this.getStyle(this.ellipsis)
+            let lineHeight = parseInt(computedStyle.lineHeight)
+            console.log('lineHeight',lineHeight)
+            this.ellipsis.style['max-height'] = this.row * lineHeight - 1 + 'px'
         }
     },
     mounted(){
-        this.ellipsis.style['-webkit-line-clamp'] = this.row
-        let computedStyle = this.getStyle(this.ellipsis)
-        let lineHeight = parseInt(computedStyle.lineHeight)
-        console.log('lineHeight',lineHeight)
-        this.ellipsis.style['max-height'] = this.row * lineHeight - 1 + 'px'
+        if(this.userNative){
+            this.nativeOverflowEllipsis()
+        }else{
+            
+        }
+       
     }
 }
 </script>

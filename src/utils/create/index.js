@@ -72,13 +72,35 @@ function updatePosition(target, pop, bounding) {
   }
 }
 
-function resizeHandler(target) {}
+function resizeHandler(target) { }
+
+function preHandlerTarget(target) {
+  if (target.$el) {
+    //target为vue组件
+    return target.$el;
+  } else if (target.target || target.srcElement) {
+    //target为事件响应参数e
+    return target.target || target.srcElement
+  } else {
+    //target为dom
+    target
+  }
+}
+
+function destroy(warp, popVm) {
+  warp.classList.toggle("show");
+  console.log("+++", popVm);
+  popVm.destroy();
+  setTimeout(_ => {
+    popVm.$destroy();
+    warp.remove();
+  }, 300);
+}
 
 function create(component, data = {}, target) {
+  console.log('component', target)
   if (!document) return;
-  if (target.$el) {
-    target = target.$el;
-  }
+  target = preHandlerTarget(target)
   if (!isDom(target)) {
     return console.log("$create第二个参数target必须为vue实例或dom对象");
   }
@@ -92,17 +114,14 @@ function create(component, data = {}, target) {
     e => {
       let target = e.target || e.srcElement;
       if (target === warp) {
-        warp.classList.toggle("show");
-        console.log("+++", popVm);
-        popVm.destroy();
-        setTimeout(_ => {
-          popVm.$destroy();
-          warp.remove();
-        }, 300);
+        destroy(warp, popVm)
       }
     },
     false
   );
+  create.close = function () {
+    destroy(warp, popVm)
+  }
 
   content.className = "wt-pop-up-content";
   warp.appendChild(content);
@@ -146,6 +165,11 @@ function create(component, data = {}, target) {
 
   updatePosition(target, popVm.$el, document.body);
 }
+
+create.close = function () {
+
+}
+
 export default {
   install(Vue) {
     Vue.prototype.$create = create;

@@ -1,7 +1,7 @@
 <template>
     <header class="st-header" direction="row">
         CRUISE
-        <wt-box direction="row" class="user-info" @click.native="showPopUpMenu" >
+        <wt-box direction="row" ref="userInfo" class="user-info" @click.native="showPopUpMenu" >
             <wt-avatar size="40px" class="head-portrait">
 
             </wt-avatar>
@@ -13,7 +13,7 @@
 <script>
 import Vue from 'vue'
 import wtAvatar from 'cps/base/wt-avatar'
-import PopUpMenu from 'cps/pop-up-menu'
+import HeaderMenu from 'cps/header-menu'
 export default {
     components:{
         wtAvatar,
@@ -25,10 +25,7 @@ export default {
     },
     methods:{
         showPopUpMenu(e){
-            // this.$createPopUpMenu({
-            //     data:[]
-            // }).show()
-            this.$create(PopUpMenu,{},e)
+            this.$create(HeaderMenu,{},this.userInfo)
         }
     },
     created(){
