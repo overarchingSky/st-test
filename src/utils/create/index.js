@@ -166,10 +166,6 @@ function create(component, data = {}, target) {
   updatePosition(target, popVm.$el, document.body);
 }
 
-create.close = function () {
-
-}
-
 export default {
   install(Vue) {
     Vue.prototype.$create = create;
