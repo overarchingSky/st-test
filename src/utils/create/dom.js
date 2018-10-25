@@ -13,7 +13,6 @@ export let isDom =
       };
 //设置位置
 export function setPosition(dom, Rect) {
-  dom.style.position = "absolute";
   Rect.top && (dom.style.top = Rect.top + "px");
   Rect.left && (dom.style.left = Rect.left + "px");
 }

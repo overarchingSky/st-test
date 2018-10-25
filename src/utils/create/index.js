@@ -41,7 +41,6 @@ function updatePosition(target, pop, bounding) {
     overflowTop = targetRect.top < popRect.height,
     //底部是否溢出容器
     overflowButtom = targetRect.bottom + popRect.height > boundingRect.height;
-  console.log("overflowButtom", targetCenterLeft, pop.getBoundingClientRect());
   //pop默认显示在正下方
   setPosition(pop, {
     top: targetRect.bottom,
@@ -83,25 +82,69 @@ function create(component, data = {}, target) {
   if (!isDom(target)) {
     return console.log("$create第二个参数target必须为vue实例或dom对象");
   }
-  let warp = document.createElement("div");
-  warp.class = "wt-pop-up-warp";
-  let content = document.createElement("div");
-  content.id = "pop-up-content";
+  let warp = document.createElement("div"),
+    content = document.createElement("div"),
+    slot = document.createElement("div");
+  warp.className = "wt-pop-up-warp";
+  //点击warp移除pop
+  warp.addEventListener(
+    "click",
+    e => {
+      let target = e.target || e.srcElement;
+      if (target === warp) {
+        warp.classList.toggle("show");
+        console.log("+++", popVm);
+        popVm.destroy();
+        setTimeout(_ => {
+          popVm.$destroy();
+          warp.remove();
+        }, 300);
+      }
+    },
+    false
+  );
+
+  content.className = "wt-pop-up-content";
   warp.appendChild(content);
   let popVm = new Vue({
     // ...options,
+    data() {
+      return {
+        isDestroy: false
+      };
+    },
+    methods: {
+      destroy() {
+        this.isDestroy = true;
+      }
+    },
     render(h) {
-      return h(component, {
-        ...data,
-        attrs: {
-          style: `potision:absolute;`
-        }
-      });
+      return h(
+        "transition",
+        {
+          attrs: {
+            mode: "out-in",
+            name: "fade"
+          }
+        },
+        !this.isDestroy && [
+          h(component, {
+            ...data,
+            attrs: {
+              style: "position:absolute;z-index:9999"
+            }
+          })
+        ]
+      );
     }
   });
   popVm.$mount(content);
   document.body.appendChild(warp);
-  updatePosition(target, warp, document.body);
+  setTimeout(_ => {
+    warp.classList.toggle("show");
+  }, 0);
+
+  updatePosition(target, popVm.$el, document.body);
 }
 export default {
   install(Vue) {

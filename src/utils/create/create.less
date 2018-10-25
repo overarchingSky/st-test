@@ -1,8 +1,67 @@
-.pop-up-mask{
+.wt-pop-up-warp{
     position: fixed;
     top:0;
     left:0;
     right:0;
     bottom:0;
-    background-color:rgba(0,0,0,0.3)
+    background-color:transparent;
+    z-index:999;
+    transition:background-color .3s;
+    &.show{
+        background-color:rgba(0,0,0,0.3)
+    }
 }
+.wt-pop-up-content{
+
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity transform .3s ease
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0
+}
+
+// .animate-build(@name){
+//     @{name}-enter-active,
+//     @{name}-leave-active{
+//       transition: opacity .8s
+//     }
+//     .@{name}-enter,
+//       .@{name}-leave-to {
+//         opacity: 0
+//       }
+//   }
+  
+//   //fade
+//   .animate-build(fade);
+  
+//   //fade-left
+//   .animate-build(fade-left);
+//   .fade-left-enter,
+//   .fade-left-leave-to {
+//     transform:translateX(2em)
+//   }
+  
+//   //fade-right
+//   .animate-build(fade-right);
+//   .fade-right-enter,
+//   .fade-right-leave-to {
+//     transform:translateX(-2em)
+//   }
+
+// //fade-up
+// .animate-build(fade-up);
+// .fade-right-enter,
+// .fade-right-leave-to {
+//     transform:translateX(2em)
+// }
+
+// //fade-down
+// .animate-build(fade-down);
+// .fade-right-enter,
+// .fade-right-leave-to {
+//     transform:translateX(-2em)
+// }
