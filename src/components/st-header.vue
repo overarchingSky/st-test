@@ -52,9 +52,7 @@ export default {
         cursor:pointer;
     }
     .head-portrait{
-        margin-right:6px;
-        background-color:red;
-        
+        margin-right:6px;        
     }
     .avatar{
         width:100%;

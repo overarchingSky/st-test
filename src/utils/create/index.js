@@ -9,6 +9,7 @@ import {
     show,
     hide
 } from "./dom";
+import { removeElement } from './prolyfill'
 let c = document && document.createElement;
 
 function createMask() {
@@ -153,14 +154,15 @@ function preHandlerTarget(target) {
 
 function destroy(warp, content, popVm, observer) {
     warp.classList.toggle("show");
-    content.remove();
-    //断开对dom变动的监听
+    console.log('content', content)
+    removeElement(content)
+        //断开对dom变动的监听
     observer.disconnect()
         //恢复默认的close方法
     create.close = function() {}
     setTimeout(_ => {
         popVm.$destroy();
-        warp.remove();
+        removeElement(warp)
     }, 300);
 }
 

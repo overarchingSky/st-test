@@ -60,8 +60,11 @@ export default {
         display:flex;
         flex-direction:column;
         overflow-y:auto;
+        flex-shrink:0;
         .st-menu{
             flex:1;
+            flex-shrink:0;
+            min-height:190px;
         }
         .st-history{
             max-height:300px;

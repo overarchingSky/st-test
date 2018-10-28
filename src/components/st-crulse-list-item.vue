@@ -11,7 +11,7 @@
             <span class="meta building" v-if="data.status == 'building'">building</span>
             <span class="meta idle"  v-if="data.status == 'idle'">Idle</span>
         </wt-row>
-        <div class="t-rt">
+        <wt-row direction="row" class="t-rt">
             <span class="icon-warp">
                 <i class="icon icon-info"></i>
                 {{data.ip}}
@@ -20,19 +20,19 @@
                 <i class="icon icon-folder"></i>
                 {{data.location}}
             </span>
-        </div>
-        <div class="b-lt">
+        </wt-row>
+        <wt-box direction="row" class="b-lt add">
             <wt-button @click.native="addResource" ref="addBtn">
-                <i class="icon icon-plus add" slot="icon"></i>
+                <i class="icon icon-plus" slot="icon"></i>
             </wt-button>
             <wt-chip :data="data.resources" class="resources"></wt-chip>
-        </div>
-        <div class="b-rt">
+        </wt-box>
+        <wt-box direction="row" class="b-rt">
             <wt-button>
                 <i class="icon icon-deny" slot="icon"></i>
                 Deny
             </wt-button>
-        </div>
+        </wt-box>
     </div>
 </template>
 
@@ -90,6 +90,8 @@ export default {
     .picture{
         grid-area:icon;
         justify-self: center;
+        align-self:center;
+        font-size:0;
     }
     .t-lt{
         grid-area:t-lt;
@@ -99,9 +101,8 @@ export default {
     }
     .b-lt{
         grid-area:b-lt;
-        display:flex;
-        flex-direction: row;
-        align-items: center;
+        justify-content:flex-start!important;
+        overflow-x: auto;
     }
     .b-rt{
         grid-area:b-rt;
@@ -132,6 +133,14 @@ export default {
     }
     .resources{
         padding:5px;
+    }
+    .add{
+        .wt-button{
+            height:30px;
+            width:30px;
+            padding:0;
+        }
+        
     }
 }
 .resource-dialog{

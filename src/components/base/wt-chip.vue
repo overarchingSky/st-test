@@ -70,6 +70,7 @@ export default {
         checkOverflow(){
             let warpScrollWidth = this.chipsWrap.$el.scrollWidth,
                 warpWidth = this.chipsWrap.$el.offsetWidth
+            console.log(warpScrollWidth , warpWidth)
             return warpScrollWidth > warpWidth
         },
         //循环遍历chip-item,截取并返回刚好塞满容器时chip-item的集合，超出容器的隐藏
@@ -94,6 +95,7 @@ export default {
             if(!this.showAll){
                 this.$nextTick(_ => {
                     if(this.overflow = this.checkOverflow()){
+
                         this.chipsData = this.getAppropriateChips()
                     }else{
                         //当不需要显示省略号按钮时，尝试关闭可能存在的弹出框
@@ -123,6 +125,7 @@ export default {
 .wt-chip{
     font-size:16px;
     overflow-x: auto;
+    overflow-y:hidden;
     flex-direction: row;
     .wt-chip-cell{
         padding:6px;
@@ -130,13 +133,21 @@ export default {
         margin-right:5px;
         margin:5px;
         background-color:@white;
+        flex-shrink: 0;
     }
     &.delay{
         visibility: hidden!important
     }
     .expansion{
         width:10px;
+        flex-shrink: 0;
+        .btn-icon{
+            height:100%;
+            width:100%;
+
+        }
         .view-more{
+            height:100%;
             width:100%
         }
     }

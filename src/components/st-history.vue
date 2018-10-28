@@ -46,6 +46,7 @@ export default{
         will-change:color;
         overflow: hidden;
         list-style:none;
+        word-wrap: no-warp;
     }
 }
 </style>
