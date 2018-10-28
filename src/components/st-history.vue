@@ -2,7 +2,7 @@
     <div class="st-history">
         history
         <ul>
-            <li v-for="(history, index) in data" :key="index" class="history-item hover" ref="historys">{{history}}</li>
+            <li :title="history" v-for="(history, index) in data" :key="index" class="history-item hover" ref="historys">{{history}}</li>
         </ul>
     </div>
 </template>
@@ -12,7 +12,7 @@ export default{
     name:'st-history',
     data(){
         return {
-            data:['ksdfjaklsjdakd/jksdfkljklasjdklfj/jaslkdfjklsfj','ksdfjaklsjdakd/jksdfkljklasjdklfj/jaslkdfjklsfjkljsgjaksgjklajskjkljks','ksdfjaklsjdakd/jksdfkljklasjdklfj/jaslkdfjklsfj','ksdfjaklsjdakd/jksdfkljklasjdklfj/jaslkdfjklsfj','ksdfjaklsjdakd/jksdfkljklasjdklfj/jaslkdfjklsfj','ksdfjaklsjdakd/jksdfkljklasjdklfj/jaslkdfjklsfj']
+            data:['ksdfjaklsjdakd/jksdfkljklasjdklfj/jaslkdfjklsfj','ksdfjaklsjdakd/jksdfkljklasjdklfj/j aslkdfjk lsfjkljsg jaksgjklajsk jkljks','ksdfjaklsjdakd/jksdfkljklasjdklfj/jaslkdfjklsfj','ksdfjaklsjdakd/jksdfkljklasjdklfj/jaslkdfjklsfj','ksdfjaklsjdakd/jksdfkljklasjdklfj/jaslkdfjklsfj','ksdfjaklsjdakd/jksdfkljklasjdklfj/jaslkdfjklsfj']
         }
     },
     computed:{
@@ -36,8 +36,6 @@ export default{
     color:#ccc;
     ul{
         list-style-type: disc;
-        -webkit-padding-start: 1.2em;
-        text-indent:0.8em;
         font-size:12px;
         color:#999;
     }
@@ -46,7 +44,8 @@ export default{
         cursor:pointer;
         transition:color .3s ease;
         will-change:color;
-        word-break: keep-all;
+        overflow: hidden;
+        list-style:none;
     }
 }
 </style>

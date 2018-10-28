@@ -1,7 +1,7 @@
 <template>
     <div class="st-crulse-list-item">
         <div class="picture">
-            <img src="~assets/os icons/cent_os.png" alt="">
+            <img :src="os" alt="">
         </div>
         <wt-row class="t-lt">
             <span class="source" slot="lt">
@@ -22,7 +22,7 @@
             </span>
         </div>
         <div class="b-lt">
-            <wt-button>
+            <wt-button @click.native="addResource" ref="addBtn">
                 <i class="icon icon-plus add" slot="icon"></i>
             </wt-button>
             <wt-chip :data="data.resources" class="resources"></wt-chip>
@@ -37,6 +37,7 @@
 </template>
 
 <script>
+import stResourcePrompt from 'cps/st-resource-prompt'
 export default {
     name:'st-crulse-list-item',
     props:{
@@ -45,6 +46,30 @@ export default {
             required:true
         }
     },
+    computed:{
+        addBtn(){
+            return this.$refs.addBtn
+        },
+        os(){
+            return 'static/os icons/' + this.data.os + '.png'
+        }
+    },
+    methods:{
+        addResource(e){
+            this.$create(stResourcePrompt,{attrs:{title:'Separate multiple resource name with commas'}},this.addBtn,'resource-dialog')
+            .then(resource => {
+                console.log('resource',resource)
+                if(resource.trim()){
+                    this.data.resources.push(resource)
+                }else{
+                    alert('不能添加空标签')
+                }
+            }).catch(_ => {
+                console.log('点击了取消')
+            })
+            
+        }
+    }
 }
 </script>
 
@@ -107,6 +132,16 @@ export default {
     }
     .resources{
         padding:5px;
+    }
+}
+.resource-dialog{
+    .wt-pop-up-arrow{
+        &:before{
+            border:1px solid @blue;
+        }
+    }
+    .wt-pop-up-content{
+        border:1px solid @blue;
     }
 }
 </style>

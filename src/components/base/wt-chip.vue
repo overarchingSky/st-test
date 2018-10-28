@@ -4,23 +4,37 @@
             {{chip}}
             <i class="icon-trash icon" @click="deleteHandler(index)"></i>
         </wt-box>
-        <wt-box v-if="overflow" class="expansion">...</wt-box>
-        <!-- <div class="all-chips">
-            <wt-box direction="row" ref="chips" class="wt-chip-cell" v-for="(chip,index) in chipsData" :key="index">
-                {{chip}}
-                <i class="icon-trash icon" @click="deleteHandler(index)"></i>
-            </wt-box>
-        </div> -->
+        <wt-button type="gray" v-if="overflow" class="expansion" @click.native="showOthers">
+            <img class="view-more" src="~assets/more.svg" slot="icon" alt="" srcset="">
+        </wt-button>
     </wt-box>
 </template>
 
 <script>
+
+let otherChipsComponent = {
+    name:'view-all',
+    render(h){
+        h('div',{
+            attrs:{
+                class:'view-all'
+            }
+        },
+            
+        )
+    }
+}
+
 export default {
     name:'wt-chip',
     props:{
         data:{
             type:Array,
             required:true
+        },
+        showAll:{
+            type:Boolean,
+            default:false
         }
     },
     data(){
@@ -29,6 +43,11 @@ export default {
             //是否有溢出
             overflow:false,
             delay:"delay"
+        }
+    },
+    watch:{
+        "data.length"(){
+            this.update()
         }
     },
     computed:{
@@ -40,6 +59,9 @@ export default {
         }
     },
     methods:{
+        showOthers(){
+            this.$create(this.$options,{attrs:{style:'padding:10px;background-color:white;max-width:500px;flex-wrap: wrap;justify-content:flex-start;'},props:{data:this.data,showAll:true}},this.chipsWrap)
+        },
         deleteHandler(index){
             this.data.splice(index,1)
             this.update()
@@ -69,15 +91,23 @@ export default {
         update(){
             //每次更新时，渲染全部的chips，强制滚动条出现（如果有的话）,以保证getAppropriateChips方法中获取的warpWidth和warpScrollWidth是期望的值
             this.chipsData = this.data
-            this.$nextTick(_ => {
-                if(this.overflow = this.checkOverflow()){
-                    this.chipsData = this.getAppropriateChips()
-                }else{
-                    this.chipsData = this.data
-                }
+            if(!this.showAll){
+                this.$nextTick(_ => {
+                    if(this.overflow = this.checkOverflow()){
+                        this.chipsData = this.getAppropriateChips()
+                    }else{
+                        //当不需要显示省略号按钮时，尝试关闭可能存在的弹出框
+                        this.$create.close()
+                        this.chipsData = this.data
+                    }
+                    //取消延迟显示的样式
+                    this.delay = ''
+                })
+            }else{
                 //取消延迟显示的样式
-                this.delay = ''
-            })
+                    this.delay = ''
+            }
+            
             
         }
 
@@ -93,22 +123,28 @@ export default {
 .wt-chip{
     font-size:16px;
     overflow-x: auto;
+    flex-direction: row;
     .wt-chip-cell{
         padding:6px;
         margin-left:5px;
         margin-right:5px;
+        margin:5px;
         background-color:@white;
     }
     &.delay{
         visibility: hidden!important
     }
     .expansion{
-        width:30px;
+        width:10px;
+        .view-more{
+            width:100%
+        }
     }
     .icon{
         margin-left:6px;
         margin-right:0;
         cursor: pointer;
     }
+    
 }
 </style>

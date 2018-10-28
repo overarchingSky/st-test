@@ -1,6 +1,6 @@
 <template>
     <wt-box direction="row" class="wt-button" :class="btnStyle">
-        <wt-box class="btn-icon icon">
+        <wt-box class="btn-icon">
             <slot name="icon" />
         </wt-box>
         <wt-box direction="row" class="btn-text">
@@ -41,6 +41,7 @@ export default {
     }
     .btn-icon{
         //如果填充了插槽(一般为icon)，就默认给一定右边距
+        margin-left:0;
         :last-child{
             margin-right:10px;
         }
@@ -62,6 +63,12 @@ export default {
         background-color:@blueBlack-1;
         &:active{
             background-color:@blueBlack;
+        }
+    }
+    &.btn-gray{
+        background-color:@white;
+        &:active{
+            background-color:@gray;
         }
     }
     

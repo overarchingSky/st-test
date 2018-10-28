@@ -1,9 +1,9 @@
 <template>
     <header class="st-header" direction="row">
-        CRUISE
-        <wt-box direction="row" ref="userInfo" class="user-info" @click.native="showPopUpMenu" >
-            <wt-avatar size="40px" class="head-portrait">
-
+        <img class="logo" src="@/assets/logo/logo.svg" alt="" srcset="">
+        <wt-box direction="row" class="user-info" @click.native="showPopUpMenu" >
+            <wt-avatar size="40px" class="head-portrait" ref="avatar">
+                <img class="avatar" src="@/assets/avatar.jpg" alt="" srcset="">
             </wt-avatar>
             <i class="icon-angle-down"></i>
         </wt-box>
@@ -13,25 +13,21 @@
 <script>
 import Vue from 'vue'
 import wtAvatar from 'cps/base/wt-avatar'
-import HeaderMenu from 'cps/header-menu'
+import HeaderMenu from 'cps/st-header-menu'
 export default {
     components:{
         wtAvatar,
     },
     computed:{
-        userInfo(){
-            return this.$refs.userInfo
+        avatar(){
+            return this.$refs.avatar
         }
     },
     methods:{
         showPopUpMenu(e){
-            this.$create(HeaderMenu,{},this.userInfo)
+            this.$create(HeaderMenu,{},this.avatar)
         }
     },
-    created(){
-        
-        //Vue.createAPI(PopUpMenu, true)
-    }
 }
 </script>
 
@@ -44,6 +40,9 @@ export default {
 	justify-content: center;
     flex-direction:row;
     position:relative;
+    .logo{
+        width:80px;
+    }
     .user-info{
         position:absolute;
         top:50%;
@@ -56,6 +55,9 @@ export default {
         margin-right:6px;
         background-color:red;
         
+    }
+    .avatar{
+        width:100%;
     }
 }
 </style>

@@ -12,56 +12,54 @@
     }
 }
 .wt-pop-up-content{
-
+  position:absolute;
+  z-index:9999;
+  box-shadow: 0 3px 5px fade(#000,30%);
 }
 
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity transform .3s ease
+.wt-pop-up-arrow{
+  position:fixed;
+  z-index:1;
+  @size:10px;
+  width:@size;
+  height:@size;
+  &:before{
+    content:'';
+    display:block;
+    position:absolute;
+    top:50%;
+    left:50%;
+    box-sizing:border-box;
+    width:@size;
+    height:@size;
+    background-color:white;
+    transform-origin: center center;
+    //这里计算了1.41(实际上是根号2)，是为了居中旋转后的伪元素
+    transform:rotate(45deg) translate(-50%/1.41,-50%/1.41);
+    border:1px solid transparent;
+  }
+  &.up{
+    &:before{
+      border-right-color:transparent!important;
+      border-bottom-color:transparent!important;
+    }
+  }
+  &.right{
+    &:before{
+      border-left-color:transparent!important;
+      border-bottom-color:transparent!important;
+    }
+  }
+  &.down{
+    &:before{
+      border-left-color:transparent!important;
+      border-top-color:transparent!important;
+    }
+  }
+  &.left{
+    &:before{
+      border-top-color:transparent!important;
+      border-right-color:transparent!important;
+    }
+  }
 }
-.fade-enter,
-.fade-leave-to {
-  opacity: 0
-}
-
-// .animate-build(@name){
-//     @{name}-enter-active,
-//     @{name}-leave-active{
-//       transition: opacity .8s
-//     }
-//     .@{name}-enter,
-//       .@{name}-leave-to {
-//         opacity: 0
-//       }
-//   }
-  
-//   //fade
-//   .animate-build(fade);
-  
-//   //fade-left
-//   .animate-build(fade-left);
-//   .fade-left-enter,
-//   .fade-left-leave-to {
-//     transform:translateX(2em)
-//   }
-  
-//   //fade-right
-//   .animate-build(fade-right);
-//   .fade-right-enter,
-//   .fade-right-leave-to {
-//     transform:translateX(-2em)
-//   }
-
-// //fade-up
-// .animate-build(fade-up);
-// .fade-right-enter,
-// .fade-right-leave-to {
-//     transform:translateX(2em)
-// }
-
-// //fade-down
-// .animate-build(fade-down);
-// .fade-right-enter,
-// .fade-right-leave-to {
-//     transform:translateX(-2em)
-// }

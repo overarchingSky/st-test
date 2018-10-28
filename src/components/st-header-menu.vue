@@ -33,10 +33,8 @@ export default{
 
 <style lang="less">
 .pop-up-menu{
-    position:absolute;
     padding:10px 0;
     background-color:white;
-    box-shadow:0 0 12px 1px #888;
     .menu-item{
         padding:6px 10px;
         cursor:pointer;

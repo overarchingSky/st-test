@@ -37,6 +37,7 @@ export default {
 .admin-view{
     height:100%;
     display:grid;
+    overflow: auto;
 	grid-template-columns: 1fr 300px 900px 1fr;
 	grid-template-rows:50px 1fr auto;
 	grid-template-areas: 

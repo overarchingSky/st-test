@@ -28,7 +28,6 @@ module.exports = {
             '@': resolve('src'),
             'less': resolve('src/less'),
             'cps': resolve('src/components'),
-            'svg-icon': resolve('src/svg-icon'),
             'layout': resolve('src/layout'),
             'assets': resolve('src/assets'),
             'pages': resolve('src/pages')
